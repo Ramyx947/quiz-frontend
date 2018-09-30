@@ -1,9 +1,10 @@
 import React from 'react'
 
+import NavBar from './components/NavBar'
 import QuizContainer from './containers/QuizContainer'
-import QuestionContainer from './containers/QuestionContainer'
-import UserContainer from './containers/UserContainer'
-import Quiz from './components/Quiz'
+import QuizDetails from './components/QuizDetails'
+// import QuestionContainer from './containers/QuestionContainer'
+// import UserContainer from './containers/UserContainer'
 
 class HomePage extends React.Component {
   state = {
@@ -12,9 +13,11 @@ class HomePage extends React.Component {
     selectedQuiz: undefined
   }
 
-  selectQuiz = (selectedQuiz) => 
-    this.setState({selectedQuiz})
+  selectQuiz = (quiz) =>
+    this.setState({ selectedQuiz: quiz })
 
+  deselectQuiz = () =>
+   this.setState({ selectedQuiz: undefined })
 
   getQuizzes =() => {
     return fetch('http://localhost:9005/quizzes')
@@ -26,14 +29,18 @@ class HomePage extends React.Component {
     this.getQuizzes()
   }
 
+  componentDidUpdate
+  
+  
   render () {
     const { quizzes, selectedQuiz } = this.state
     return (
       <div className='grid-container'>
+        <NavBar />
         {
-          selectedQuiz ?
-            <Quiz quiz={selectedQuiz} /> :
-            <QuizContainer quizzes={quizzes} selectQuiz={this.selectQuiz} />
+          selectedQuiz
+            ? <QuizDetails quiz={selectedQuiz} deselectQuiz={this.deselectQuiz} />
+            : <QuizContainer quizzes={quizzes} selectQuiz={this.selectQuiz} />
         }
 
       </div>

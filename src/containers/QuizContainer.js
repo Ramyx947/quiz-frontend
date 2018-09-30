@@ -1,16 +1,16 @@
 import React from 'react'
 import QuizCard from '../components/QuizCard'
 
-class QuizContainer extends React.Component {
-  render () {
-    return (
-      <div className='quizzes'>
-        {
-          this.props.quizzes.map(quiz => <QuizCard quiz={quiz} selectQuiz={this.props.selectQuiz}/>)
-        }
-      </div>
-    )
-  }
-}
+const QuizContainer = ({ quizzes, selectQuiz }) =>
+  <div className='quizzes-list'>
+      Quizzes options:
+    {
+      quizzes.map(quiz =>
+        <QuizCard
+          quiz={quiz}
+          selectQuiz={selectQuiz}
+        />)
+    }
+  </div>
 
 export default QuizContainer

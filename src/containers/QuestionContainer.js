@@ -1,5 +1,15 @@
 import React from 'react'
 
-const QuestionContainer = props => <div></div>
+import QuestionCard from '../components/QuestionCard'
+
+const QuestionContainer = props => 
+    <div className='question-options'/>
+      {/* {
+        this.quizzes.map(quiz =>
+          <QuestionCard
+            quiz:{quiz} />
+        )
+      } */}
+
 
 export default QuestionContainer
