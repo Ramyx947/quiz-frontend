@@ -21,7 +21,7 @@ const QuizCard = (props) => {
   }
 
   return <div onClick={() => props.selectQuiz(props.quiz)} className='quiz-card'>
-    <img style={{ width: '100%' }} src={imageUrl} />
+    <img style={{ width: '100%' }} src={imageUrl} alt={props.quiz.title}/>
   </div>
 }
 

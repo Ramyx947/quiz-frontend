@@ -6,7 +6,10 @@ class QuizContainer extends React.Component {
     return (
       <div className='quizzes'>
         {
-          this.props.quizzes.map(quiz => <QuizCard quiz={quiz} selectQuiz={this.props.selectQuiz}/>)
+          this.props.quizzes.map(quiz =>
+            <QuizCard quiz={quiz}
+            selectQuiz={this.props.selectQuiz}
+            id={quiz.id} />)
         }
       </div>
     )
