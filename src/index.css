@@ -33,6 +33,12 @@ body {
     color: white;
 }
 
+.optionButton:disabled {
+  background-color: white;
+  color: black;
+  cursor: default;
+}
+
 .nextButton {
   text-decoration: none;
   display: inline-block;
@@ -61,3 +67,7 @@ body {
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+.question-text {
+  font-size: 2rem;
+}
