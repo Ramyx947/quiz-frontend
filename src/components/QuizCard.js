@@ -1,9 +1,9 @@
 import React from 'react'
 
-const QuizCard = (props) => {
+const QuizCard = ({ quiz, selectQuiz }) => {
   let imageUrl
 
-  switch (props.quiz.subject) {
+  switch (quiz.subject) {
     case 'JS':
       imageUrl = 'https://cdn-images-1.medium.com/max/1052/1*DN7ToydkJZEdVaJVK_Nhvw.png'
       break
@@ -20,8 +20,8 @@ const QuizCard = (props) => {
       imageUrl = ''
   }
 
-  return <div onClick={() => props.selectQuiz(props.quiz)} className='quiz-card'>
-    <img style={{ width: '100%' }} src={imageUrl} alt={props.quiz.title}/>
+  return <div onClick={() => selectQuiz(quiz)} className='quiz-card'>
+    <img style={{ width: '100%' }} src={imageUrl} />
   </div>
 }
 
