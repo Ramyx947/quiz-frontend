@@ -13,6 +13,9 @@ export default class Quiz extends React.Component {
     selectedOption: undefined
   }
 
+  selectQuestion = (event) =>
+    this.setState({currentQuestion: event.target.value})
+
   selectOption = (selectedOption) => {
     this.setState({ selectedOption })
   }
@@ -42,16 +45,15 @@ export default class Quiz extends React.Component {
   render() {
     const { title, subject, questions } = this.props.quiz
     const { score, currentQuestion} = this.state
+    const {selectQuestion} = this
 
     return(
-
-
       <div>
         <div className="pagination">
           <a>&laquo;</a>
-          <a>1</a>
+          <a onClick={selectQuestion}>1</a>
           <a>2</a>
-          <a>3</a>
+          <a onClick={selectQuestion}>3</a>
           <a>4</a>
           <a>5</a>
           <a>6</a>
