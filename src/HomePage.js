@@ -3,14 +3,15 @@ import React from 'react'
 import NavBar from './components/NavBar'
 import QuizContainer from './containers/QuizContainer'
 import Quiz from './components/Quiz'
-// import QuestionContainer from './containers/QuestionContainer'
-// import UserContainer from './containers/UserContainer'
+import SignInForm from './components/SignInForm'
+
 
 class HomePage extends React.Component {
   state = {
     quizzes: [],
     users: [],
-    selectedQuiz: undefined
+    selectedQuiz: undefined,
+    currentUser: undefined
   }
 
   selectQuiz = (selectedQuiz) =>
@@ -27,10 +28,13 @@ class HomePage extends React.Component {
 
   componentDidMount() {
     this.getQuizzes()
+    //const currentUser = localStorage.getItem('currentUser')
+    //if currentUser {
+    //this.signin(currentUser)}
   }
 
   render () {
-    const { quizzes, selectedQuiz } = this.state
+    const { quizzes, selectedQuiz, currentUser } = this.state
     return (
       <div className='grid-container'>
         <NavBar />
