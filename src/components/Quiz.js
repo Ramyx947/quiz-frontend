@@ -63,7 +63,7 @@ export default class Quiz extends React.Component {
         </div><br></br>
         <h1>{title}</h1>
       {
-        currentQuestion > 9 ?
+        currentQuestion > 10 ?
         < SubmitForm score={score} submitScore={this.submitScore} resetQuestions={this.resetQuestions}/> :
         < QuestionCard questions={questions}
           currentQuestion={currentQuestion}
