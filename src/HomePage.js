@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactModalLogin from 'react-modal-login'
 
 import NavBar from './components/NavBar'
 import QuizContainer from './containers/QuizContainer'
@@ -6,12 +7,22 @@ import Quiz from './components/Quiz'
 import SignInForm from './components/SignInForm'
 
 
+
 class HomePage extends React.Component {
   state = {
     quizzes: [],
     users: [],
     selectedQuiz: undefined,
-    currentUser: undefined
+    currentUser: undefined,
+  }
+
+
+  postQuiz = (email, quiz) => {
+	  fetch(`http://localhost:3005/users/${email}`, {
+    	method: 'POST',
+    	headers: {'Content-Type': 'application/json'},
+    	body: JSON.stringify({ quiz })
+	  }).then(resp => resp.json())
   }
 
   getUser = (email) => {
@@ -60,7 +71,10 @@ class HomePage extends React.Component {
 
         { currentUser ?
           <NavBar currentUser={currentUser} signOut={this.signOut}/> :
-          <SignInForm getUser={this.getUser} signIn={this.signIn} signOut={this.signOut}/>
+          <SignInForm getUser={this.getUser}
+                      signIn={this.signIn}
+                      signOut={this.signOut}
+                      openModal={this.openModal} />
         }
         {
           selectedQuiz

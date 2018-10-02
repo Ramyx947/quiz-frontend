@@ -10,7 +10,8 @@ export default class Quiz extends React.Component {
   state = {
     currentQuestion: 1,
     score: 0,
-    selectedOption: undefined
+    selectedOption: undefined,
+    userQuiz: []
   }
 
   selectQuestion = (event) =>
@@ -22,7 +23,6 @@ export default class Quiz extends React.Component {
 
   submitScore = () => {
     //submit this.state.score to users data
-    return < UserCard />
   }
 
   selectNextQuestion = () => {
@@ -51,9 +51,9 @@ export default class Quiz extends React.Component {
       <div>
         <div className="pagination">
           <a>&laquo;</a>
-          <a onClick={selectQuestion}>1</a>
+          <a>1</a>
           <a>2</a>
-          <a onClick={selectQuestion}>3</a>
+          <a>3</a>
           <a>4</a>
           <a>5</a>
           <a>6</a>
