@@ -4,11 +4,11 @@ import Choice from './Choice'
 
 class QuestionCard extends React.Component {
 
-  state = {}
+
 
   buttonClass = (choice, i) => {
-    return choice.chosen ? (choice.correct ? 'correct' : 'incorrect')
-      : (this.state.selectedIndex === i ? 'pulsing' : '')
+    return this.props.answered ? (choice.correct ? 'correct' : 'incorrect')
+      : (this.props.teasing ? 'pulsing' : '')
   }
 
   render () {
@@ -16,16 +16,21 @@ class QuestionCard extends React.Component {
       //  console.log('Question:', props.currentQuestion)
       return question.number == this.props.currentQuestion
     })
+    const { answered, teasing } = this.props
+    const { questions, selectNextQuestion, score, currentQuestion } = this.props
+
     return (
       <div>
         <h4>{foundQuestion.number}.{foundQuestion.text}</h4>
         {foundQuestion.choices.map((choice, i) =>
           <div>
             <Choice
-              score={this.props.score}
+              testing={teasing}
+              answered={answered}
+              score={score}
               key={choice.option}
               choice={choice}
-              disabled={this.state.teasing || choice.chosen}
+              disabled={teasing || answered}
               className={`optionButton ${this.buttonClass(choice, i)}`}
               onClick={() => this.props.selectOption(choice, i)}>{choice.option}
             </Choice>
