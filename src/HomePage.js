@@ -18,10 +18,10 @@ class HomePage extends React.Component {
     this.setState({selectedQuiz})
 
   deselectQuiz = () =>
-   this.setState({ selectedQuiz: undefined })
+    this.setState({ selectedQuiz: undefined })
 
   getQuizzes =() => {
-    return fetch('http://localhost:3005/quizzes')
+    return fetch('http://localhost:3006/quizzes')
       .then(resp => resp.json())
       .then(quizzes => this.setState({ quizzes }))
   }
