@@ -22,6 +22,7 @@ class QuestionCard extends React.Component {
         {foundQuestion.choices.map((choice, i) =>
           <div>
             <Choice
+              score={this.props.score}
               key={choice.option}
               choice={choice}
               disabled={this.state.teasing || choice.chosen}

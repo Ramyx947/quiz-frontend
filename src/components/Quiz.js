@@ -8,9 +8,7 @@ export default class Quiz extends React.Component {
   state = {
     currentQuestion: 1,
     score: 0,
-    selectedOption: undefined,
-    answered: false,
-    selectedIndex: null
+    selectedOption: undefined
   }
 
   submitScore = () => {
@@ -27,8 +25,20 @@ export default class Quiz extends React.Component {
     })
   }
 
+  // selectNextQuestion = (currentQuestion)=>{
+  //   selectedOption.correct ? 
+  //     (this.setState({score: this.state.score +1}) && this.setState({currentQuestion: this.state.currentQuestion + 1}) :
+  //     (this.setState({ score: this.state.score + 0 } && this.setState({ currentQuestion: this.state.currentQuestion + 1 })
+
+  //     this.resetOption()
+  // }
+
+  // resetOption=()=>{
+  //   this.setState({ selectedOption: undefined })
+  // }
+  
   selectNextQuestion = () => {
-    if (this.state.selectedOption) {
+    if (this.state.selectedOption === true) {
       this.setState({ score: this.state.score + 1 })
       this.setState({ currentQuestion: this.state.currentQuestion + 1 })
     } else {
@@ -45,7 +55,7 @@ export default class Quiz extends React.Component {
 
   render () {
     // console.log('Quiz:', this.props)
-    const { title, subject, questions } = this.props.quiz
+    const { title, questions } = this.props.quiz
     const { score, currentQuestion } = this.state
 
     return (
@@ -81,7 +91,7 @@ export default class Quiz extends React.Component {
               currentQuestion={currentQuestion}
             />
         }
-        <p>Current score:{score}</p>
+        <p>Current score:{this.state.score}</p>
       </div>
 
     )
