@@ -9,6 +9,12 @@ export default class Quiz extends React.Component {
     currentQuestion: 1,
     score: 0,
     selectedOption: undefined,
+    userQuiz: []
+  }
+
+  selectQuestion = (event) =>
+    this.setState({currentQuestion: event.target.value})
+
     questionState: {
       teasing: false,
       answered: false
@@ -54,6 +60,7 @@ export default class Quiz extends React.Component {
       })
       this.setState({ score: this.state.score + (choice.correct ? 1 : 0) })
     }, 2000)
+
   }
 
   // selectNextQuestion = (currentQuestion)=>{
@@ -91,7 +98,6 @@ export default class Quiz extends React.Component {
     const { score, currentQuestion, teasing } = this.state
 
     return (
-
       <div>
         <div className='pagination'>
           <a>&laquo;</a>
