@@ -4,8 +4,6 @@ import Choice from './Choice'
 
 class QuestionCard extends React.Component {
 
-
-
   buttonClass = (choice, i) => {
     return this.props.answered ? (choice.correct ? 'correct' : 'incorrect')
       : (this.props.teasing ? 'pulsing' : '')

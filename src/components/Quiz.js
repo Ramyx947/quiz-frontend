@@ -56,18 +56,6 @@ export default class Quiz extends React.Component {
     }, 2000)
   }
 
-  // selectNextQuestion = (currentQuestion)=>{
-  //   selectedOption.correct ? 
-  //     (this.setState({score: this.state.score +1}) && this.setState({currentQuestion: this.state.currentQuestion + 1}) :
-  //     (this.setState({ score: this.state.score + 0 } && this.setState({ currentQuestion: this.state.currentQuestion + 1 })
-
-  //     this.resetOption()
-  // }
-
-  // resetOption=()=>{
-  //   this.setState({ selectedOption: undefined })
-  // }
-
   selectNextQuestion = () => {
     if (this.state.selectedOption === true) {
       this.setState({ score: this.state.score + 1 })
