@@ -1,4 +1,5 @@
 import React from 'react'
+import UserCard from './UserCard'
 
 const SubmitForm = props => {
 
@@ -10,7 +11,7 @@ return(
     <button className="nextButton" onClick={props.resetQuestions}>Try again</button>
     <br></br>
     <br></br>
-    <h5>See all your results</h5>
+    <button onClick={() => props.showUserData}>See all your results</button>
   </div>
 
 )}

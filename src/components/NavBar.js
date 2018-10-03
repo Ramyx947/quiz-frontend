@@ -6,7 +6,7 @@ const NavBar = (props) => {
   return (
     <Fragment>
     <div className='nacWrapper'>
-      <span className='headerText'>Welcome {props.currentUser.name && `, ${props.currentUser.name}`}
+      <span className='headerText'>Welcome{props.currentUser.name && `, ${props.currentUser.name}`}
       </span>
       <button onClick={props.signOut}>Logout</button>
     </div>
@@ -29,7 +29,7 @@ export default NavBar
 // User page (+ charts?)
 //add search functionality
 // stop breaking if email incorrect for login && give error message instead
-// disable next button until timer complete chosen
 //menu navigation
 //can only submit once - disable button once clicked
 //React router
+//change pointer to show button disabled 

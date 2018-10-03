@@ -6,6 +6,8 @@ import NavBar from './components/NavBar'
 import QuizContainer from './containers/QuizContainer'
 import Quiz from './components/Quiz'
 import SignInForm from './components/SignInForm'
+import UserCard from './components/UserCard'
+import Search from './components/Search'
 
 
 class HomePage extends React.Component {
@@ -14,7 +16,20 @@ class HomePage extends React.Component {
     users: [],
     selectedQuiz: undefined,
     currentUser: undefined,
+    showUserData: false,
+    searchQuery: ""
   }
+
+  updateSearch = (searchQuery) => this.setState({searchQuery})
+
+  filterQuizzes = () =>
+     this.state.quizzes.filter(quiz => {
+      const subject = quiz.subject.toLowerCase()
+      const title = quiz.title.toLowerCase()
+      const searchQuery = this.state.searchQuery.toLowerCase()
+
+      return subject.includes(searchQuery) || title.includes(searchQuery)
+    })
 
   postQuiz = (email, quiz, score) => {
 	  return fetch(`http://localhost:3005/users/${email}`, {
@@ -64,11 +79,12 @@ class HomePage extends React.Component {
   }
 
   render () {
-    const { quizzes, selectedQuiz, currentUser } = this.state
-    const { chooseOption, increaseScore, selectQuiz, postQuiz, deselectQuiz } = this
+    const { quizzes, selectedQuiz, currentUser, showUserData } = this.state
+    const { chooseOption, increaseScore, selectQuiz, postQuiz, deselectQuiz, updateSearch } = this
     return (
       <Container>
         <div className="top-banner">
+          <Search updateSearch={updateSearch}/>
         { currentUser ?
           <NavBar currentUser={currentUser} signOut={this.signOut}/> :
           <SignInForm getUser={this.getUser}
@@ -85,10 +101,11 @@ class HomePage extends React.Component {
                     currentUser={currentUser}
                     increaseScore={increaseScore}
                     chooseOption={chooseOption}
-                    selectedQuiz={selectedQuiz} />
-            : <QuizContainer quizzes={quizzes} selectQuiz={selectQuiz} />
+                    selectedQuiz={selectedQuiz}
+                    showUserData={showUserData} />
+                  : <QuizContainer quizzes={this.filterQuizzes()} selectQuiz={selectQuiz} />
         }
-
+        { (showUserData === true) ? <UserCard/> : null }
       </Container>
     )
   }

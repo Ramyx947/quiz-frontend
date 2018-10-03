@@ -100,6 +100,7 @@ export default class Quiz extends React.Component {
               submitScore={this.submitScore}
               resetQuestions={this.resetQuestions}
               postQuiz={() => this.props.postQuiz(currentUser.email, selectedQuiz, score)}
+              showUserData={this.props.showUserData}
             />
             : <QuestionCard
               teasing={this.state.questionState.teasing}
@@ -111,7 +112,7 @@ export default class Quiz extends React.Component {
               currentQuestion={currentQuestion}
             />
         }
-        
+
       </div>
 
     )
