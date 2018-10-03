@@ -49,7 +49,7 @@ export default class Quiz extends React.Component {
         }
       })
       this.setState({ score: this.state.score + (choice.correct ? 1 : 0) })
-    }, 2000)
+    }, 1000)
   }
 
 
@@ -111,7 +111,7 @@ export default class Quiz extends React.Component {
               currentQuestion={currentQuestion}
             />
         }
-        <p>Current score:{score}</p>
+        
       </div>
 
     )
