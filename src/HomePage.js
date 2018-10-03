@@ -16,12 +16,11 @@ class HomePage extends React.Component {
     currentUser: undefined,
   }
 
-
-  postQuiz = (email, quiz) => {
-	  fetch(`http://localhost:3005/users/${email}`, {
+  postQuiz = (email, quiz, score) => {
+	  return fetch(`http://localhost:3005/users/${email}`, {
     	method: 'POST',
     	headers: {'Content-Type': 'application/json'},
-    	body: JSON.stringify({ quiz })
+    	body: JSON.stringify({quiz: { ...quiz, score}})
 	  }).then(resp => resp.json())
   }
 
@@ -43,7 +42,7 @@ class HomePage extends React.Component {
   }
 
   selectQuiz = (selectedQuiz) =>
-    this.setState({selectedQuiz})
+    this.setState({ selectedQuiz: JSON.parse(JSON.stringify(selectedQuiz)) })
 
   deselectQuiz = () =>
     this.setState({ selectedQuiz: undefined })
@@ -66,6 +65,7 @@ class HomePage extends React.Component {
 
   render () {
     const { quizzes, selectedQuiz, currentUser } = this.state
+    const { chooseOption, increaseScore, selectQuiz, postQuiz, deselectQuiz } = this
     return (
       <Container>
         <div className="top-banner">
@@ -80,10 +80,13 @@ class HomePage extends React.Component {
         {
           selectedQuiz
             ? <Quiz quiz={selectedQuiz}
-                    deselectQuiz={this.deselectQuiz}
-                    postQuiz={this.postQuiz} 
-                    currentUser={currentUser} />
-            : <QuizContainer quizzes={quizzes} selectQuiz={this.selectQuiz} />
+                    deselectQuiz={deselectQuiz}
+                    postQuiz={postQuiz}
+                    currentUser={currentUser}
+                    increaseScore={increaseScore}
+                    chooseOption={chooseOption}
+                    selectedQuiz={selectedQuiz} />
+            : <QuizContainer quizzes={quizzes} selectQuiz={selectQuiz} />
         }
 
       </Container>
