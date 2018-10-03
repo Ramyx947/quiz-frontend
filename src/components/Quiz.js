@@ -9,35 +9,26 @@ export default class Quiz extends React.Component {
     currentQuestion: 1,
     score: 0,
     selectedOption: undefined,
-    userQuiz: []
-  }
-
-  selectQuestion = (event) =>
-    this.setState({currentQuestion: event.target.value})
-
+    userQuiz: [],
     questionState: {
       teasing: false,
       answered: false
     }
   }
 
-  initialQuestionState () {
+  initialQuestionState = () => {
     return {
       teasing: false,
       answered: false
     }
   }
 
-  resetQuestionState() {
-    this.setState({ 
+  resetQuestionState = () => {
+    this.setState({
       questionState: this.initialQuestionState()
     })
   }
 
-  submitScore = () => {
-    // submit this.state.score to users data
-    return <UserCard />
-  }
 
   selectOption = (choice, i) => {
     choice.chosen = true
@@ -60,27 +51,17 @@ export default class Quiz extends React.Component {
       })
       this.setState({ score: this.state.score + (choice.correct ? 1 : 0) })
     }, 2000)
-
   }
 
-  // selectNextQuestion = (currentQuestion)=>{
-  //   selectedOption.correct ? 
-  //     (this.setState({score: this.state.score +1}) && this.setState({currentQuestion: this.state.currentQuestion + 1}) :
-  //     (this.setState({ score: this.state.score + 0 } && this.setState({ currentQuestion: this.state.currentQuestion + 1 })
-
-  //     this.resetOption()
-  // }
-
-  // resetOption=()=>{
-  //   this.setState({ selectedOption: undefined })
-  // }
 
   selectNextQuestion = () => {
+    const {currentQuestion, score} = this.state
+
     if (this.state.selectedOption === true) {
-      this.setState({ score: this.state.score + 1 })
-      this.setState({ currentQuestion: this.state.currentQuestion + 1 })
+      this.setState({ score: score + 1 })
+      this.setState({ currentQuestion: currentQuestion + 1 })
     } else {
-      this.setState({ currentQuestion: this.state.currentQuestion + 1 })
+      this.setState({ currentQuestion: currentQuestion + 1 })
     }
 
     this.setState({ selectedOption: undefined })
@@ -93,9 +74,8 @@ export default class Quiz extends React.Component {
   }
 
   render () {
-    // console.log('Quiz:', this.props)
     const { title, questions } = this.props.quiz
-    const { score, currentQuestion, teasing } = this.state
+    const { score, currentQuestion, teasing, userQuiz } = this.state
 
     return (
       <div>
@@ -112,14 +92,14 @@ export default class Quiz extends React.Component {
           <a>9</a>
           <a>10</a>
           <a href='#'>&raquo;</a>
-        </div><br />
-        <h1>{title}</h1>
+        </div><br></br>
         {
-          currentQuestion > 10
+          currentQuestion > 10 && this.props.currentUser
             ? <SubmitForm
               score={score}
               submitScore={this.submitScore}
               resetQuestions={this.resetQuestions}
+              postQuiz={this.props.postQuiz}
             />
             : <QuestionCard
               teasing={this.state.questionState.teasing}
@@ -129,6 +109,7 @@ export default class Quiz extends React.Component {
               score={score}
               selectOption={this.selectOption}
               currentQuestion={currentQuestion}
+              userQuiz={userQuiz}
             />
         }
         <p>Current score:{score}</p>

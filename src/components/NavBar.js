@@ -11,3 +11,10 @@ const NavBar = (props) => {
 }
 
 export default NavBar
+
+
+// save userQuiz state 
+// submit quiz and post to user's Quizzes
+// sort out modal/login styling
+// User page (+ charts?)
+// stop breaking if email incorrect for login && give error message instead

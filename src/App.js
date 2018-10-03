@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
+import { Container } from 'semantic-ui-react'
+
 
 import HomePage from './HomePage'
 

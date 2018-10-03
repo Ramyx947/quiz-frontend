@@ -4,8 +4,6 @@ import Choice from './Choice'
 
 class QuestionCard extends React.Component {
 
-
-
   buttonClass = (choice, i) => {
     return this.props.answered ? (choice.correct ? 'correct' : 'incorrect')
       : (this.props.teasing ? 'pulsing' : '')
@@ -13,14 +11,13 @@ class QuestionCard extends React.Component {
 
   render () {
     const foundQuestion = this.props.questions.find(question => {
-      //  console.log('Question:', props.currentQuestion)
       return question.number == this.props.currentQuestion
     })
     const { answered, teasing } = this.props
     const { questions, selectNextQuestion, score, currentQuestion } = this.props
 
     return (
-      <div>
+      <div className="question-card">
         <h4>{foundQuestion.number}.{foundQuestion.text}</h4>
         {foundQuestion.choices.map((choice, i) =>
           <div>

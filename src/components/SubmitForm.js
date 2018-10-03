@@ -6,12 +6,13 @@ return(
 
   <div>
     <h3>Well done, you have completed the quiz! Your score is {props.score}</h3>
-    <button className="nextButton" onClick={props.submitScore}>Submit score</button>
+    <br></br>
+    <button className="nextButton" onClick={(event) => props.postQuiz( event.target.value , props.score)}>Submit score</button>
     <button className="nextButton" onClick={props.resetQuestions}>Try again</button>
+    <br></br>
+    <br></br>
     <h5>See all your results</h5>
-
   </div>
-
 
 )}
 
