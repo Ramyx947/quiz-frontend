@@ -5,6 +5,11 @@ import { Header, Icon, Modal, Image } from 'semantic-ui-react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
+const style = {
+  background: 'white',
+  borderRadius: '5px',
+  padding: '10px'
+}
 
 export default class SignInForm extends React.Component {
 
@@ -27,17 +32,17 @@ render() {
   const { handleChange } = this
 
   return(
-    <div>
-    <TextField
-        id='emailInput'
-        label='Email'
-        value={email}
-        onChange={handleChange}
-        margin='normal'
-        name='email'
-        color='primary'
-      />
-      <br />
+    <div style={style}>
+      <TextField
+          id='emailInput'
+          label='Email'
+          value={email}
+          onChange={handleChange}
+          margin='normal'
+          name='email'
+          color='primary'
+        />
+        <br />
         <Button onClick={() => this.props.getUser(email)} variant='contained' color='primary'>
           LOGIN
         </Button>

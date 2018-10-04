@@ -81,16 +81,9 @@ export default class Quiz extends React.Component {
       <div>
         <div className='pagination'>
           <a>&laquo;</a>
-          <a>1</a>
-          <a>2</a>
-          <a>3</a>
-          <a>4</a>
-          <a>5</a>
-          <a>6</a>
-          <a>7</a>
-          <a>8</a>
-          <a>9</a>
-          <a>10</a>
+          {questions.map((quiz, i) =>
+            <a>{i+1}</a>
+          )}
           <a href='#'>&raquo;</a>
         </div><br></br>
         {

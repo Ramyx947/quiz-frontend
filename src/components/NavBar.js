@@ -27,9 +27,9 @@ export default NavBar
 
 // sort out modal/login styling
 // User page (+ charts?)
-//add search functionality
 // stop breaking if email incorrect for login && give error message instead
 //menu navigation
 //can only submit once - disable button once clicked
 //React router
-//change pointer to show button disabled 
+//change pointer to show button disabled
+//signup form

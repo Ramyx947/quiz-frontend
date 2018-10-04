@@ -6,8 +6,10 @@ import NavBar from './components/NavBar'
 import QuizContainer from './containers/QuizContainer'
 import Quiz from './components/Quiz'
 import SignInForm from './components/SignInForm'
+import SignUpForm from './components/SignUpForm'
 import UserCard from './components/UserCard'
 import Search from './components/Search'
+import SignInModal from './components/SignInModal'
 
 
 class HomePage extends React.Component {
@@ -20,7 +22,15 @@ class HomePage extends React.Component {
     searchQuery: ""
   }
 
-  updateSearch = (searchQuery) => this.setState({searchQuery})
+  createUser = (name, email) => {
+      return fetch('http://localhost:3005/users', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ user: {name, email}})
+  	  }).then(resp => resp.json())
+    }
+
+  updateSearch = (searchQuery) => this.setState({ searchQuery })
 
   filterQuizzes = () =>
      this.state.quizzes.filter(quiz => {
@@ -43,7 +53,7 @@ class HomePage extends React.Component {
     fetch(`http://localhost:3005/users/${email}`)
     .then(resp => resp.json())
     .then(data => this.setState({currentUser: data},
-      localStorage.setItem('currentUser', data.email)
+      () => localStorage.setItem('currentUser', data.email)
     ))
   }
 
@@ -79,20 +89,35 @@ class HomePage extends React.Component {
   }
 
   render () {
-    const { quizzes, selectedQuiz, currentUser, showUserData } = this.state
-    const { chooseOption, increaseScore, selectQuiz, postQuiz, deselectQuiz, updateSearch } = this
+    const { quizzes, selectedQuiz, currentUser, showUserData, showModal } = this.state
+    const {
+      chooseOption,
+      increaseScore,
+      selectQuiz,
+      postQuiz,
+      deselectQuiz,
+      updateSearch,
+      getUser,
+      signIn,
+      signOut,
+      openModal
+    } = this
     return (
       <Container>
         <div className="top-banner">
-          <Search updateSearch={updateSearch}/>
+
         { currentUser ?
           <NavBar currentUser={currentUser} signOut={this.signOut}/> :
-          <SignInForm getUser={this.getUser}
-                      signIn={this.signIn}
-                      signOut={this.signOut}
-                      openModal={this.openModal} />
+          <SignInModal
+            getUser={getUser}
+            signIn={signIn}
+            signOut={signOut}
+            openModal={openModal}
+          />
+
         }
         </div>
+        <Search updateSearch={updateSearch}/>
         {
           selectedQuiz
             ? <Quiz quiz={selectedQuiz}
@@ -106,6 +131,7 @@ class HomePage extends React.Component {
                   : <QuizContainer quizzes={this.filterQuizzes()} selectQuiz={selectQuiz} />
         }
         { (showUserData === true) ? <UserCard/> : null }
+        <SignUpForm/>
       </Container>
     )
   }
