@@ -10,14 +10,6 @@ const NavBar = (props) => {
       </span>
       <button onClick={props.signOut}>Logout</button>
     </div>
-
-    <div class="dropdown">
-         <button class="dropbtn">Menu</button>
-           <div class="dropdown-content">
-             <a href="#">Home</a>
-             <a href="#">My Account</a>
-           </div>
-    </div>
     </Fragment>
   )
 }
@@ -25,11 +17,11 @@ const NavBar = (props) => {
 export default NavBar
 
 
-// sort out modal/login styling
+//search bar styling
+//search function styling
 // User page (+ charts?)
-// stop breaking if email incorrect for login && give error message instead
+// stop breaking if email incorrect for login && give error message instead/ redirect to sign up
 //menu navigation
 //can only submit once - disable button once clicked
 //React router
 //change pointer to show button disabled
-//signup form

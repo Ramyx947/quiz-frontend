@@ -10,6 +10,8 @@ import SignUpForm from './components/SignUpForm'
 import UserCard from './components/UserCard'
 import Search from './components/Search'
 import SignInModal from './components/SignInModal'
+import MenuDropDown from './components/MenuDropDown'
+
 
 
 class HomePage extends React.Component {
@@ -60,7 +62,6 @@ class HomePage extends React.Component {
   signIn = (currentUser) =>
     this.setState({currentUser})
 
-
   signOut = () => {
     this.setState({currentUser: undefined})
     localStorage.removeItem('currentUser')
@@ -100,12 +101,14 @@ class HomePage extends React.Component {
       getUser,
       signIn,
       signOut,
-      openModal
+      openModal,
+      createUser
     } = this
     return (
+    <div>
+      <MenuDropDown/>
       <Container>
         <div className="top-banner">
-
         { currentUser ?
           <NavBar currentUser={currentUser} signOut={this.signOut}/> :
           <SignInModal
@@ -113,11 +116,11 @@ class HomePage extends React.Component {
             signIn={signIn}
             signOut={signOut}
             openModal={openModal}
+            createUser={createUser}
           />
 
         }
         </div>
-        <Search updateSearch={updateSearch}/>
         {
           selectedQuiz
             ? <Quiz quiz={selectedQuiz}
@@ -128,11 +131,14 @@ class HomePage extends React.Component {
                     chooseOption={chooseOption}
                     selectedQuiz={selectedQuiz}
                     showUserData={showUserData} />
-                  : <QuizContainer quizzes={this.filterQuizzes()} selectQuiz={selectQuiz} />
+                  : <QuizContainer quizzes={this.filterQuizzes()}
+                      selectQuiz={selectQuiz}
+                      updateSearch={updateSearch} />
+
         }
         { (showUserData === true) ? <UserCard/> : null }
-        <SignUpForm/>
       </Container>
+      </div>
     )
   }
 }

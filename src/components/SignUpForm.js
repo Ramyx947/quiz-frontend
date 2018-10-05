@@ -3,12 +3,15 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
+
+
 export default class SignUpForm extends React.Component {
 
   state = {
     name: undefined,
     email: undefined
   }
+
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
@@ -25,7 +28,7 @@ export default class SignUpForm extends React.Component {
           value={name}
           onChange={this.handleChange}
           margin='normal'
-          name='email'
+          name='name'
           color='primary'
         />
         <br />
@@ -39,7 +42,9 @@ export default class SignUpForm extends React.Component {
           color='primary'
         />
         <br />
-          <Button variant='contained' color='primary'>
+          <Button onClick={() => this.props.createUser(name, email)}
+            variant='contained'
+            color='primary'>
             SIGN UP
           </Button>
         </div>

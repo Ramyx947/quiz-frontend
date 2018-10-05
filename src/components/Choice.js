@@ -15,11 +15,3 @@ class Choice extends React.Component {
   }
 }
 export default Choice
-
-// props available
-// score = { this.props.score }
-// key = { choice.option }
-// choice = { choice }
-// disabled = { this.state.teasing || choice.chosen }
-// className = {`optionButton ${this.buttonClass(choice, i)}`}
-// onClick = {() => this.props.selectOption(choice, i)}> { choice.option }
