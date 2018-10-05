@@ -17,7 +17,7 @@ class HomePage extends React.Component {
   }
 
   postQuiz = (email, quiz, score) => {
-	  return fetch(`http://localhost:3005/users/${email}`, {
+	  return fetch(`http://localhost:3006/users/${email}`, {
     	method: 'POST',
     	headers: {'Content-Type': 'application/json'},
     	body: JSON.stringify({quiz: { ...quiz, score}})
@@ -25,7 +25,7 @@ class HomePage extends React.Component {
   }
 
   getUser = (email) => {
-    fetch(`http://localhost:3005/users/${email}`)
+    fetch(`http://localhost:3006/users/${email}`)
     .then(resp => resp.json())
     .then(data => this.setState({currentUser: data},
       localStorage.setItem('currentUser', data.email)
@@ -48,7 +48,7 @@ class HomePage extends React.Component {
     this.setState({ selectedQuiz: undefined })
 
   getQuizzes =() => {
-    return fetch('http://localhost:3005/quizzes')
+    return fetch('http://localhost:3006/quizzes')
       .then(resp => resp.json())
       .then(quizzes => this.setState({ quizzes }))
   }
@@ -57,7 +57,7 @@ class HomePage extends React.Component {
     this.getQuizzes()
     const currentUserEmail = localStorage.getItem('currentUser')
     if (currentUserEmail) {
-        fetch(`http://localhost:3005/users/${currentUserEmail}`)
+        fetch(`http://localhost:3006/users/${currentUserEmail}`)
         .then(resp => resp.json())
         .then(data => this.setState({currentUser: data}))
     }
