@@ -6,6 +6,12 @@ import NavBar from './components/NavBar'
 import QuizContainer from './containers/QuizContainer'
 import Quiz from './components/Quiz'
 import SignInForm from './components/SignInForm'
+import SignUpForm from './components/SignUpForm'
+import UserCard from './components/UserCard'
+import Search from './components/Search'
+import SignInModal from './components/SignInModal'
+import MenuDropDown from './components/MenuDropDown'
+
 
 
 class HomePage extends React.Component {
@@ -14,7 +20,28 @@ class HomePage extends React.Component {
     users: [],
     selectedQuiz: undefined,
     currentUser: undefined,
+    showUserData: false,
+    searchQuery: ""
   }
+
+  createUser = (name, email) => {
+      return fetch('http://localhost:3005/users', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ user: {name, email}})
+  	  }).then(resp => resp.json())
+    }
+
+  updateSearch = (searchQuery) => this.setState({ searchQuery })
+
+  filterQuizzes = () =>
+     this.state.quizzes.filter(quiz => {
+      const subject = quiz.subject.toLowerCase()
+      const title = quiz.title.toLowerCase()
+      const searchQuery = this.state.searchQuery.toLowerCase()
+
+      return subject.includes(searchQuery) || title.includes(searchQuery)
+    })
 
   postQuiz = (email, quiz, score) => {
 	  return fetch(`http://localhost:3006/users/${email}`, {
@@ -28,13 +55,12 @@ class HomePage extends React.Component {
     fetch(`http://localhost:3006/users/${email}`)
     .then(resp => resp.json())
     .then(data => this.setState({currentUser: data},
-      localStorage.setItem('currentUser', data.email)
+      () => localStorage.setItem('currentUser', data.email)
     ))
   }
 
   signIn = (currentUser) =>
     this.setState({currentUser})
-
 
   signOut = () => {
     this.setState({currentUser: undefined})
@@ -64,17 +90,35 @@ class HomePage extends React.Component {
   }
 
   render () {
-    const { quizzes, selectedQuiz, currentUser } = this.state
-    const { chooseOption, increaseScore, selectQuiz, postQuiz, deselectQuiz } = this
+    const { quizzes, selectedQuiz, currentUser, showUserData, showModal } = this.state
+    const {
+      chooseOption,
+      increaseScore,
+      selectQuiz,
+      postQuiz,
+      deselectQuiz,
+      updateSearch,
+      getUser,
+      signIn,
+      signOut,
+      openModal,
+      createUser
+    } = this
     return (
+    <div>
+      <MenuDropDown/>
       <Container>
         <div className="top-banner">
         { currentUser ?
           <NavBar currentUser={currentUser} signOut={this.signOut}/> :
-          <SignInForm getUser={this.getUser}
-                      signIn={this.signIn}
-                      signOut={this.signOut}
-                      openModal={this.openModal} />
+          <SignInModal
+            getUser={getUser}
+            signIn={signIn}
+            signOut={signOut}
+            openModal={openModal}
+            createUser={createUser}
+          />
+
         }
         </div>
         {
@@ -85,11 +129,16 @@ class HomePage extends React.Component {
                     currentUser={currentUser}
                     increaseScore={increaseScore}
                     chooseOption={chooseOption}
-                    selectedQuiz={selectedQuiz} />
-            : <QuizContainer quizzes={quizzes} selectQuiz={selectQuiz} />
-        }
+                    selectedQuiz={selectedQuiz}
+                    showUserData={showUserData} />
+                  : <QuizContainer quizzes={this.filterQuizzes()}
+                      selectQuiz={selectQuiz}
+                      updateSearch={updateSearch} />
 
+        }
+        { (showUserData === true) ? <UserCard/> : null }
       </Container>
+      </div>
     )
   }
 }

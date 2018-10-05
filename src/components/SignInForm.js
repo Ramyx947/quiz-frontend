@@ -28,16 +28,16 @@ render() {
 
   return(
     <div>
-    <TextField
-        id='emailInput'
-        label='Email'
-        value={email}
-        onChange={handleChange}
-        margin='normal'
-        name='email'
-        color='primary'
-      />
-      <br />
+      <TextField
+          id='emailInput'
+          label='Email'
+          value={email}
+          onChange={handleChange}
+          margin='normal'
+          name='email'
+          color='primary'
+        />
+        <br />
         <Button onClick={() => this.props.getUser(email)} variant='contained' color='primary'>
           LOGIN
         </Button>
@@ -47,58 +47,3 @@ render() {
 }
 
 }
-
-
-//<button
-//   onClick={() => this.openModal()}>
-//   Log in
-// </button>
-//
-// <ReactModalLogin
-//   visible={showModal}
-//   onCloseModal={this.closeModal.bind(this)}
-//   />
-//
-//   <TextField
-//     id='emailInput'
-//     label='Email'
-//     value={email}
-//     onChange={handleChange}
-//     margin='normal'
-//     name='email'
-//   />
-//   <br />
-//     <Button onClick={() => this.props.getUser(email)} variant='contained' color='primary'>
-//       SUBMIT
-//     </Button>
-
-
-//
-// <Modal
-//      trigger={<Button onClick={this.handleOpen}>Login</Button>}
-//      open={this.state.modalOpen}
-//      onClose={this.handleClose}
-//      basic
-//      size='small'
-//    >
-//      <Header icon='browser' content='Please enter your email address' />
-//      <Modal.Content>
-//        <TextField
-//            id='emailInput'
-//            label='Email'
-//            value={email}
-//            onChange={handleChange}
-//            margin='normal'
-//            name='email'
-//          />
-//          <Button onClick={() => this.props.getUser(email)} variant='contained' color='primary'>
-//                Signin
-//          </Button>
-//
-//      </Modal.Content>
-//      <Modal.Actions>
-//        <Button color="blue" onClick={this.handleClose} inverted>
-//          <Icon name='checkmark' /> close
-//        </Button>
-//      </Modal.Actions>
-//    </Modal>

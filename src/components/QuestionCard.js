@@ -18,7 +18,8 @@ class QuestionCard extends React.Component {
 
     return (
       <div className="question-card">
-        <h4>{foundQuestion.number}.{foundQuestion.text}</h4>
+        <h4>{foundQuestion.number}. {foundQuestion.text}</h4>
+        <br></br>
         {foundQuestion.choices.map((choice, i) =>
           <div>
             <Choice
@@ -33,11 +34,16 @@ class QuestionCard extends React.Component {
             </Choice>
           </div>
         )}
+        <br></br>
         <button
           className='nextButton'
+          disabled={this.props.teasing || this.props.answered === false}
           onClick={this.props.selectNextQuestion}>
         NEXT QUESTION!!!
         </button>
+        <br></br>
+        <br></br>
+        <p>Current score: {score}</p>
       </div>
     )
   }

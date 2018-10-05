@@ -49,7 +49,7 @@ export default class Quiz extends React.Component {
         }
       })
       this.setState({ score: this.state.score + (choice.correct ? 1 : 0) })
-    }, 2000)
+    }, 1000)
   }
 
 
@@ -81,16 +81,9 @@ export default class Quiz extends React.Component {
       <div>
         <div className='pagination'>
           <a>&laquo;</a>
-          <a>1</a>
-          <a>2</a>
-          <a>3</a>
-          <a>4</a>
-          <a>5</a>
-          <a>6</a>
-          <a>7</a>
-          <a>8</a>
-          <a>9</a>
-          <a>10</a>
+          {questions.map((quiz, i) =>
+            <a>{i+1}</a>
+          )}
           <a href='#'>&raquo;</a>
         </div><br></br>
         {
@@ -100,6 +93,7 @@ export default class Quiz extends React.Component {
               submitScore={this.submitScore}
               resetQuestions={this.resetQuestions}
               postQuiz={() => this.props.postQuiz(currentUser.email, selectedQuiz, score)}
+              showUserData={this.props.showUserData}
             />
             : <QuestionCard
               teasing={this.state.questionState.teasing}
@@ -111,7 +105,7 @@ export default class Quiz extends React.Component {
               currentQuestion={currentQuestion}
             />
         }
-        <p>Current score:{score}</p>
+
       </div>
 
     )
